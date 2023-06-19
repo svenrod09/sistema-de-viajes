@@ -1,0 +1,31 @@
+<div class="row">
+  <!-- Encabezado -->
+  <div class="col-12 text-center">
+    <h2 class="fw-bold mb-3">Menú Principal</h2>
+  </div>
+
+  <!-- Redireccionar al formulario de asignación de sucursales -->
+  <div class="col-sm-6 col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Asignar una sucursal</h5>
+        <a class="btn btn-primary" [routerLink]="['/asignar-sucursal']">Ir</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Redireccionar al reporte de los viajes realizados -->
+  <div class="col-sm-6 col-md-4 mb-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Reporte de Viajes</h5>
+        <a class="btn btn-primary" [routerLink]="['/reporte-de-viajes']">Ir</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para redireccionar al login -->
+  <div class="col-12 text-center">
+    <button class="btn btn-danger" (click)="logout()">Salir</button>
+  </div>
+</div>

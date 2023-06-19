@@ -1,0 +1,89 @@
+<div class="row">
+  <!-- Encabezado -->
+  <div class="col-12 text-center mb-3">
+    <h2 class="fw-bold">Registrar Viaje</h2>
+  </div>
+
+  <!-- Select de Sucursales-->
+  <div class="col-12 mb-3">
+    <select
+      class="form-select"
+      aria-label="Sucursales"
+      [(ngModel)]="selectedSucursal"
+      (change)="onSucursalChange($event)"
+    >
+      <option value="-1" selected>Seleccione una sucursal</option>
+      <option *ngFor="let sucursal of sucursales" [value]="sucursal.id">
+        {{ sucursal.nombre }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Select de Transportistas -->
+  <div class="col-12 mb-3">
+    <select
+      class="form-select"
+      aria-label="Transportistas"
+      [(ngModel)]="selectedTransportista"
+      (change)="onTransportistaChange($event)"
+    >
+      <option value="-1" selected>Seleccione un transportista</option>
+      <option
+        *ngFor="let transportista of transportistas"
+        [value]="transportista.id"
+      >
+        {{ transportista.nombre }} {{ transportista.apellido }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Input de Distancia -->
+  <div class="col-12 mb-3">
+    <label for="distancia" class="form-label fw-bold"
+      >Distancia recorrida (en kilómetros)</label
+    >
+    <input
+      type="number"
+      class="form-control"
+      id="distancia"
+      [(ngModel)]="distancia"
+      (input)="validateDistancia()"
+    />
+    <!-- Error (solo se mostrará si se ingresa una distancia inválida) -->
+    <p class="text-danger" *ngIf="distanciaError">
+      La distancia debe ser un valor mayor a 0 y menor o igual a 100.
+    </p>
+  </div>
+
+  <!-- Datepicker -->
+  <div class="col-12 mb-3">
+    <label for="fecha" class="form-label fw-bold me-3">Fecha</label>
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="selectedDate"
+        placeholder="Fecha"
+        id="fecha"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <!-- Botón para registrar -->
+  <div class="col-12 text-center mb-3">
+    <button
+      class="btn btn-primary"
+      [disabled]="!isValidForm()"
+      (click)="registrarViaje()"
+    >
+      Registrar Viaje
+    </button>
+  </div>
+
+  <!-- Mensaje de error (solo se mostrará si ocurre un error al registrar el viaje) -->
+  <div class="col-12 text-center">
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+</div>

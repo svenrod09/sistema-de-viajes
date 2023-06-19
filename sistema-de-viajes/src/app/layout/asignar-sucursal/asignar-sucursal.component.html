@@ -1,0 +1,76 @@
+<div class="row">
+  <!-- Encabezado -->
+  <div class="col-12 mb-3 text-center">
+    <h2 class="fw-bold">Asignar una sucursal</h2>
+  </div>
+
+  <!-- Select de Sucursales-->
+  <div class="col-12 mb-3">
+    <select
+      class="form-select"
+      aria-label="Sucursales"
+      [(ngModel)]="selectedSucursal"
+      (change)="onSucursalChange($event)"
+    >
+      <option value="-1" selected>Seleccione una sucursal</option>
+      <option *ngFor="let sucursal of sucursales" [value]="sucursal.id">
+        {{ sucursal.nombre }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Select de Colaboradores -->
+  <div class="col-12 mb-3">
+    <select
+      class="form-select"
+      aria-label="Colaboradores"
+      [disabled]="selectedSucursal === -1"
+      [(ngModel)]="selectedColaborador"
+      (change)="onColaboradorChange($event)"
+    >
+      <option value="-1" selected>Seleccione un colaborador</option>
+      <option
+        *ngFor="let colaborador of colaboradores"
+        [value]="colaborador.id"
+      >
+        {{ colaborador.nombre }} {{ colaborador.apellido }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Input de Distancia -->
+  <div class="col-12 mb-3">
+    <label for="distancia" class="form-label fw-bold"
+      >Distancia (en kilómetros)</label
+    >
+    <input
+      type="number"
+      class="form-control"
+      id="distancia"
+      [(ngModel)]="distancia"
+      (input)="validateDistancia()"
+    />
+
+    <!-- Error (solo se mostrará si se ingresa una distancia inválida) -->
+    <p class="text-danger" *ngIf="distanciaError">
+      La distancia debe ser un valor mayor a 0 y menor o igual a 50.
+    </p>
+  </div>
+
+  <!-- Botón para asignar una sucursal a un colaborador -->
+  <div class="col-12 text-center mb-3">
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="!isValidForm()"
+      (click)="asignarSucursal()"
+    >
+      Ingresar
+    </button>
+  </div>
+
+  <!-- Mensaje de error (solo se mostrará si ocurre un error al registrar el viaje) -->
+  <div class="col-12 text-center">
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+</div>
